@@ -37,4 +37,11 @@ public class ClientTest{
     Client.clear();
     assertEquals(0,Client.all().size());
   }
+  @Test
+  public void getId_clientInstantiateWithAnID_1(){
+    Client.clear();
+    Client newClient=new Client("leah");
+    assertEquals(1,newClient.getId());
+
+  }
 }
