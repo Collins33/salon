@@ -22,4 +22,7 @@ public LocalDateTime isCreatedAt(){
 public static List<Client> all(){
         return instances;
 }
+public static void clear(){
+        instances.clear();
+}
 }

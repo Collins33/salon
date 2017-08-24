@@ -31,4 +31,10 @@ public class ClientTest{
     assertEquals(true,Client.all().contains(newClient));
     assertEquals(true,Client.all().contains(secondClient));
   }
+  @Test
+  public void clear_emptiesAllClientsFromArrayList_0(){
+    Client newClient=new Client("leah");
+    Client.clear();
+    assertEquals(0,Client.all().size());
+  }
 }
