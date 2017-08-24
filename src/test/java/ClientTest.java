@@ -24,4 +24,11 @@ public class ClientTest{
       Client newClient=new Client("leah");
       assertEquals(LocalDateTime.now().getDayOfWeek(), newClient. isCreatedAt().getDayOfWeek());
   }
+  @Test
+  public void all_returnsAllInstancesOfClient_true(){
+    Client newClient=new Client("leah");
+    Client secondClient=new Client("anita");
+    assertEquals(true,Client.all().contains(newClient));
+    assertEquals(true,Client.all().contains(secondClient));
+  }
 }
