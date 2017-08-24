@@ -30,4 +30,7 @@ public static void clear(){
 public int getId(){
   return mId;
 }
+public static Client find(int id) {
+  return instances.get(id - 1);
+}
 }

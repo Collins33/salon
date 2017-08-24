@@ -44,4 +44,10 @@ public class ClientTest{
     assertEquals(1,newClient.getId());
 
   }
+  @Test
+  public void find_returnsClientWithSameId_secondTask(){
+    Client newClient=new Client("leah");
+    Client secondClient=new Client("anita");
+    assertEquals(Client.find(secondClient.getId()),secondClient);
+  }
 }
