@@ -44,5 +44,26 @@ public static void main(String[] args) {
                     model.put("template","templates/stylist.vtl");
                     return new ModelAndView(model,layout);
             },new VelocityTemplateEngine());
+
+        //add new client through the stylist route
+        get("/stylist/:id/client/new", (request,response) ->{
+                    Map<String, Object> model = new HashMap<String, Object>();
+                    Stylist stylist=Stylist.find(Integer.parseInt(request.params(":id")));
+                    model.put("stylist",stylist);
+                    model.put("template","templates/client-form.vtl");
+                    return new ModelAndView(model,layout);
+            },new VelocityTemplateEngine());
+
+        //PROCESS THE CLIENT form
+        post("/client",(request,response) ->{
+                     Map<String, Object> model = new HashMap<String, Object>();
+                     Stylist stylist = Stylist.find(Integer.parseInt(request.queryParams("stylistId")));
+                     String name=request.queryParams("name");
+                     Client newClient=new Client(name);
+                     stylist.addClient(newClient);
+                     model.put("stylist",stylist);
+                     model.put("template","templates/success.vtl");
+                     return new ModelAndView(model,layout);
+             },new VelocityTemplateEngine());
 }
 }
