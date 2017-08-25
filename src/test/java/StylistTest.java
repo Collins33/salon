@@ -45,4 +45,19 @@ public void find_returnsClientWithSameId_secondTask(){
         Stylist secondStylist=new Stylist("anita");
         assertEquals(Stylist.find(secondStylist.getId()),secondStylist);
 }
+
+@Test
+public void getClients_initiallyReturnsEmptyList_ArrayList(){
+  Stylist.clear();
+  Stylist newStylist=new Stylist("leah");
+  assertEquals(0,newStylist.getClients().size());
+}
+
+@Test
+public void addClient_toArrayList_true(){
+  Stylist newStylist=new Stylist("leah");
+  Client newClient=new Client("leah");
+  newStylist.addClient(newClient);
+  assertTrue(newStylist.getClients().contains(newClient));
+}
 }
