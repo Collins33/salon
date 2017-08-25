@@ -1,12 +1,27 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>SALON</title>
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-  </head>
-  <body>
-    <div class="container">
-      #parse( $template )
-    </div>
-  </body>
+
+<head>
+  <title>SALON</title>
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+</head>
+
+<body>
+  <div class="container">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">SALON</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">Home</a></li>
+          <li><a href="/stylist/new">ADD STYLIST</a></li>
+          <li><a href="/stylist">VIEW LISTED STYLIST</a></li>
+        </ul>
+      </div>
+    </nav>
+    #parse( $template )
+  </div>
+</body>
+
 </html>
