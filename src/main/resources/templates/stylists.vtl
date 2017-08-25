@@ -2,6 +2,6 @@
 
 #foreach($stylist in $stylists)
 <div class="col-md-3 well">
-<h2>$stylist.getName()</h2>
+<h2><a href="/stylist/$stylist.getId()">$stylist.getName()</a></h2>
 </div>
 #end
