@@ -97,4 +97,13 @@ public class ClientTest{
     newClient.update("collins");
     assertEquals("collins",Client.find(newClient.getId()).getName());
   }
+  //delete client
+  @Test
+  public void delete_deletesClient_true(){
+    Client newClient=new Client("leah",1);
+    newClient.save();
+    int clientId=newClient.getId();
+    newClient.delete();
+    assertEquals(null,Client.find(clientId));
+  }
 }

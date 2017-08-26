@@ -77,15 +77,29 @@ public static void main(String[] args) {
                     model.put("template","templates/client.vtl");
                     return new ModelAndView(model,layout);
             },new VelocityTemplateEngine());
-
+        //process the update form
         post("/stylist/:stylist_id/clients/:id", (request,response)->{
                      Map<String, Object> model = new HashMap<String, Object>();
+                     //retrieve client with corresponding id
                      Client client = Client.find(Integer.parseInt(request.params("id")));
                      String name = request.queryParams("name");
                      Stylist stylist = Stylist.find(client.getStylistId());
+                     //update method passed on the new name
                      client.update(name);
                      String url = String.format("/stylist/%d/clients/%d", stylist.getId(), client.getId());
                      response.redirect(url);
+                     return new ModelAndView(model,layout);
+             },new VelocityTemplateEngine());
+
+        post("/stylist/:stylist_id/clients/:id/delete", (request,response) ->{
+                     Map<String, Object> model = new HashMap<String, Object>();
+                     //find client based on the url
+                     Client client = Client.find(Integer.parseInt(request.params("id")));
+                     //find stylist based on the client
+                     Stylist stylist = Stylist.find(client.getStylistId());
+                     client.delete();
+                     model.put("client",client);
+                     model.put("stylist",stylist);
                      return new ModelAndView(model,layout);
              },new VelocityTemplateEngine());
 }
