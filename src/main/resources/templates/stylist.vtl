@@ -7,7 +7,7 @@
 <h2 class="text-center">MY CLIENTS</h2>
 <ol>
 #foreach($client in $stylist.getClients())
-<li>$client.getName()</li>
+<li><a href="/stylist/$stylist.getId()/clients/$client.getId()">$client.getName()</a></li>
 #end
 </ol>
 </div>
