@@ -9,12 +9,14 @@ private String name;
 private LocalDateTime createdAt;
 
 private int id;
+private int stylistId;
 
 
 //constructor
-public Client(String name){
+public Client(String name,int stylistId){
         this.name=name;
         createdAt=LocalDateTime.now();
+        this.stylistId=stylistId;
 }
 
 
@@ -27,6 +29,9 @@ public LocalDateTime isCreatedAt(){
 }
 public int getId(){
   return id;
+}
+public int getStylistId(){
+  return stylistId;
 }
 public static Client find(int id) {
   try(Connection con=DB.sql2o.open()){
@@ -44,7 +49,7 @@ public static Client find(int id) {
 //retrieves into ArrayList
 //all() returns the ArrayList created containing the name and id
 public static List<Client> all(){
-String sql="SELECT id,name FROM clients";
+String sql="SELECT id, name, stylistId FROM clients";
 try(Connection con=DB.sql2o.open()){
  return con.createQuery(sql).executeAndFetch(Client.class);
 
@@ -59,16 +64,17 @@ public boolean equals(Object myClient){
   else{
     Client firstClient=(Client) myClient;
     return this.getName().equals(firstClient.getName())&&
-    this.getId() == firstClient.getId();
+    this.getId() == firstClient.getId() && this.getStylistId() == firstClient.getStylistId();
 
   }
 }
 //saves into the database
 public void save(){
   try(Connection con=DB.sql2o.open()){
-    String sql="INSERT INTO clients (name) VALUES (:name)";
+    String sql="INSERT INTO clients (name, stylistId) VALUES (:name, :stylistId)";
     this.id=(int)con.createQuery(sql,true)
     .addParameter("name",this.name)
+    .addParameter("stylistId",this.stylistId)
     .executeUpdate()
     .getKey();
   }

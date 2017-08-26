@@ -16,30 +16,32 @@ public class ClientTest{
   @After
   public void tearDown(){
     try(Connection con=DB.sql2o.open()){
-      String sql="DELETE FROM clients *;";
-      con.createQuery(sql).executeUpdate();
+      String clientsql="DELETE FROM clients *;";
+      String stylistsql="DELETE FROM stylists *;";
+      con.createQuery(clientsql).executeUpdate();
+      con.createQuery(stylistsql).executeUpdate();
     }
   }
 
   //test for instance
   @Test
   public void instantiateswell_true(){
-    Client newClient=new Client("leah");
+    Client newClient=new Client("leah",1);
     assertEquals(true, newClient instanceof Client);
   }
  //test if it instantiates with property of name
   @Test
   public void Client_instantiatesWithName_string(){
-    Client newClient=new Client("leah");
+    Client newClient=new Client("leah",1);
     assertEquals("leah",newClient.getName());
   }
  //get time when client was registered
-  
+
   @Test
   public void all_returnsAllInstancesOfClient_true(){
-    Client newClient=new Client("leah");
+    Client newClient=new Client("leah",1);
     newClient.save();
-    Client secondClient=new Client("anita");
+    Client secondClient=new Client("anita",2);
     secondClient.save();
     assertEquals(true,Client.all().get(0).equals(newClient));
     assertEquals(true,Client.all().get(1).equals(secondClient));
@@ -48,16 +50,16 @@ public class ClientTest{
   @Test
   public void getId_clientInstantiateWithAnID_1(){
 
-    Client newClient=new Client("leah");
+    Client newClient=new Client("leah",1);
     newClient.save();
     assertTrue(newClient.getId()>0);
 
   }
   @Test
   public void find_returnsClientWithSameId_secondTask(){
-    Client newClient=new Client("leah");
+    Client newClient=new Client("leah",1);
     newClient.save();
-    Client secondClient=new Client("anita");
+    Client secondClient=new Client("anita",2);
     secondClient.save();
     assertEquals(Client.find(secondClient.getId()),secondClient);
   }
@@ -65,15 +67,26 @@ public class ClientTest{
   //database tests
   @Test
   public void save_returnsTrueIfNamesAretheSame(){
-    Client newClient=new Client("leah");
+    Client newClient=new Client("leah",1);
     newClient.save();
     assertTrue(Client.all().get(0).equals(newClient));
   }
   @Test
   public void save_assignsIdToObject(){
-    Client newClient=new Client("leah");
+    Client newClient=new Client("leah",1);
     newClient.save();
     Client myClient =Client.all().get(0);
     assertEquals(newClient.getId(),myClient.getId());
+  }
+  //test to see if we can save stylistId into clients table
+
+  @Test
+  public void save_savesStylistIdIntoDB_true(){
+    Stylist newStylist=new Stylist("leah");
+    newStylist.save();
+    Client newClient=new Client("leah",newStylist.getId());
+    newClient.save();
+    Client client=Client.find(newClient.getId());
+    assertEquals(client.getStylistId(), newStylist.getId());
   }
 }

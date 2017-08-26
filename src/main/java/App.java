@@ -25,6 +25,7 @@ public static void main(String[] args) {
                      Map<String, Object> model = new HashMap<String, Object>();
                      String name =request.queryParams("name");
                      Stylist newStylist=new Stylist(name);
+                     newStylist.save();
                      model.put("template","templates/awesome.vtl");
                      return new ModelAndView(model,layout);
              },new VelocityTemplateEngine());
@@ -59,8 +60,9 @@ public static void main(String[] args) {
                      Map<String, Object> model = new HashMap<String, Object>();
                      Stylist stylist = Stylist.find(Integer.parseInt(request.queryParams("stylistId")));
                      String name=request.queryParams("name");
-                     Client newClient=new Client(name);
-                     stylist.addClient(newClient);
+                     Client newClient=new Client(name,stylist.getId());
+                     newClient.save();
+                     
                      model.put("stylist",stylist);
                      model.put("template","templates/success.vtl");
                      return new ModelAndView(model,layout);
