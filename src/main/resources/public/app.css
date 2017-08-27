@@ -1,0 +1,16 @@
+body{
+  font-family: 'Mukta Mahee', sans-serif;
+}
+.home{
+  height: 500px;
+  background-image: url("http://www.magic4walls.com/wp-content/uploads/2014/09/model-make-up-trend-2014-dark-blue-hair-women-ombre-wallpaper.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  color: white;
+}
+.client{
+  margin-left: auto;
+  margin-right: auto;
+}
