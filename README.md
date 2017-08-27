@@ -21,6 +21,7 @@ collinsnjau39@gmail.com
 CREATE DATABASE hair_salon;
 CREATE TABLE clients (id serial PRIMARY KEY, name varchar, stylistId int);
 CREATE TABLE stylist (id serial PRIMARY KEY, name varchar);
+ -psql media < media.sql(run in terminal)
  -gradle run
 
 License
